@@ -1,4 +1,4 @@
-name: "con_con"
+name: "ConCon"
 
 services:
   rails-app:
