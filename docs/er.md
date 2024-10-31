@@ -1,4 +1,4 @@
-```mermaid　
+```mermaid
 erDiagram
   users ||--o{ event_attendees : ""
   event_group_subscriptions }o--|| users: ""
@@ -16,8 +16,6 @@ erDiagram
   events {
     bigint id PK
     references user FK
-    string title "投稿タイトル"
-    text content "投稿内容"
     timestamp created_at
     timestamp deleted_at
   }
@@ -27,8 +25,8 @@ erDiagram
     references user FK
     references event FK
     timestamp created_at
-    timestamp deleted_at
-  }  
+    timestamp deleted_atv
+  }
 
   event_groups {
     bigint id PK
