@@ -2,7 +2,7 @@
 erDiagram
   users ||--o{ event_attendees : ""
   event_group_subscriptions }o--|| users: ""
-  event_attendees }o--|| events : ""
+  event_attendees }o--|| event_capacities : ""
   events }o--|| event_groups: ""
   event_group_subscriptions }o--|| event_groups: ""
   events ||--o{ slides: ""
@@ -12,7 +12,7 @@ erDiagram
     bigint id PK
     string name "ユーザー名"
     timestamp created_at
-    timestamp deleted_at
+    timestamp updated_at
   }
 
   events {
@@ -28,7 +28,7 @@ erDiagram
     string location
     timestamp created_at
     timestamp updated_at
-    timestamp deleted_at
+    timestamp updated_at
   }
 
   event_capacities {
@@ -38,7 +38,6 @@ erDiagram
     integer maximum
     timestamp created_at
     timestamp updated_at
-    timestamp deleted_at
   }
 
   slides {
@@ -48,24 +47,23 @@ erDiagram
     text url
     timestamp created_at
     timestamp updated_at
-    timestamp deleted_at
   }
 
   event_attendees {
     bigint id PK
     references user FK
-    references event FK
+    references event_capacity FK
     timestamp created_at
-    timestamp deleted_atv
+    timestamp updated_atv
   }
 
   event_groups {
     bigint id PK
-    references post FK
-    references user FK
-    text content "コメント内容"
+    references event FK
+    string name
+    text description
     timestamp created_at
-    timestamp deleted_at
+    timestamp updated_at
   }
 
   event_group_subscriptions {
@@ -73,18 +71,16 @@ erDiagram
     references user FK
     references event_group FK
     timestamp created_at
-    timestamp deleted_at
+    timestamp updated_at
   }
 
   settings {
     bigint id PK
+    text name
+    string value
     timestamp created_at
-    timestamp deleted_at
+    timestamp updated_at
   }
 
-  messages {
-    bigint id PK
-    timestamp created_at
-    timestamp deleted_at
-  }
+
   ```
