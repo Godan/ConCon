@@ -4,7 +4,9 @@ erDiagram
   event_group_subscriptions }o--|| users: ""
   event_attendees }o--|| events : ""
   events }o--|| event_groups: ""
-  event_group_subscriptions }o--|| events: ""
+  event_group_subscriptions }o--|| event_groups: ""
+  events ||--o{ slides: ""
+  events ||--o{ event_capacities: ""
 
   users {
     bigint id PK
@@ -15,8 +17,37 @@ erDiagram
 
   events {
     bigint id PK
-    references user FK
+    references created_by FK
+    references event_group FK
+    string title
+    string subtitle
+    string thumbnail
+    long_text description
+    datetime start_at
+    datetime end_at
+    string location
     timestamp created_at
+    timestamp updated_at
+    timestamp deleted_at
+  }
+
+  event_capacities {
+    bigint id PK
+    references events FK
+    string kind
+    integer maximum
+    timestamp created_at
+    timestamp updated_at
+    timestamp deleted_at
+  }
+
+  slides {
+    bigint id PK
+    references event FK
+    references created_by FK
+    text url
+    timestamp created_at
+    timestamp updated_at
     timestamp deleted_at
   }
 
